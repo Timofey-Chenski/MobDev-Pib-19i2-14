@@ -42,7 +42,7 @@ public class Main {
         }
         else
         {
-            System.out.print("Ошибка при вводе, попробуйте еще раз");
+            System.out.print("Ошибка, попробуйте еще раз");
         }
     }
 
