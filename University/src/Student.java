@@ -1,40 +1,43 @@
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Student extends human
+public class Student extends Human implements Serializable
 {
-    double avg_score;
-    Task[] tasks_list = new Task[10];
-    Achievement[] achievements_list = new Achievement[10];
+    private static final long serialVersionUID = 1L;
+
+    double avgScore;
+    Task[] tasksList = new Task[5];
+    Achievement[] achievementsList = new Achievement[5];
     public Student()
     {
         Random r = new Random();
-        iD_number = r.nextInt(900)+100;
-        avg_score = Math.random()*(5-3.5)+3.5;//Использовать при выводе System.out.printf("%.1f", i);
-        amount_of_visits = 0;
+        idNumber = r.nextInt(900)+100;
+        avgScore = Math.random()*(5-3.5)+3.5;//Использовать при выводе System.out.printf("%.1f", i);
+        amountOfVisits = 0;
     }
 
     @Override
     public String toString() {
-        return "Student{" +
-                "ID = " + iD_number +
-                "Visits =" + amount_of_visits +
-                "avg_score =" + avg_score +
-                ", tasks_list =" + Arrays.toString(tasks_list) +
-                ", achievements_list =" + Arrays.toString(achievements_list) +
-                '}';
+        return  " Student{" +
+                " id = " + idNumber +
+                " visits =" + amountOfVisits +
+                " avgScore =" + avgScore + "%n" +
+                " tasksList =" + Arrays.toString(tasksList) + "%n" +
+                " achievementsList =" + Arrays.toString(achievementsList) +
+                "}" + "%n";
     }
 
-    public void Task_assign(int i)
+    public void taskAssign(int i)
     {
 
-            tasks_list[i] = new Task();
+        tasksList[i] = new Task();
 
     }
-    public void Achiev_assign(int i)
+    public void achievAssign(int i)
     {
 
-            achievements_list[i] = new Achievement();
+        achievementsList[i] = new Achievement();
 
     }
 }

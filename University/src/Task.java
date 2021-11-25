@@ -1,28 +1,32 @@
+import java.io.Serializable;
 import java.util.Random;
 
-public class Task {
-    Tasks_pit task_description;
-    Reviews_pit task_review;
+public class Task implements Serializable
+{
+    private static final long serialVersionUID = 4L;
+
+    TasksPit taskDescription;
+    ReviewsPit taskReview;
 
     @Override
     public String toString() {
         return "Task{" +
-                "task_description=" + task_description +
-                ", task_review=" + task_review +
+                "taskDescription=" + taskDescription +
+                ", taskReview=" + taskReview +
                 '}';
     }
 
-    public Tasks_pit randomTask() {
-        int pick = new Random().nextInt(Tasks_pit.values().length);
-        return Tasks_pit.values()[pick];
+    public TasksPit randomTask() {
+        int pick = new Random().nextInt(TasksPit.values().length);
+        return TasksPit.values()[pick];
     }
-    public Reviews_pit randomReview() {
-        int pick = new Random().nextInt(Reviews_pit.values().length);
-        return Reviews_pit.values()[pick];
+    public ReviewsPit randomReview() {
+        int pick = new Random().nextInt(ReviewsPit.values().length);
+        return ReviewsPit.values()[pick];
     }
     public Task(){
 
-        task_description =randomTask();
-        task_review = randomReview();
+        taskDescription = randomTask();
+        taskReview = randomReview();
     }
 }

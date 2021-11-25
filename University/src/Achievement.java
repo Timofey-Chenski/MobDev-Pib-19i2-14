@@ -1,22 +1,26 @@
+import java.io.Serializable;
 import java.util.Random;
 
-public class Achievement {
-    Achievements_pit achievement_description;
+public class Achievement implements Serializable
+{
+    private static final long serialVersionUID = 2L;
+
+    AchievementsPit achievementDescription;
 
     @Override
     public String toString() {
         return "Achievement{" +
-                "achievement_description=" + achievement_description +
+                "achievementDescription=" + achievementDescription +
                 '}';
     }
 
-    public Achievements_pit randomDescription() {
-        int pick = new Random().nextInt(Achievements_pit.values().length);
-        return Achievements_pit.values()[pick];
+    public AchievementsPit randomDescription() {
+        int pick = new Random().nextInt(AchievementsPit.values().length);
+        return AchievementsPit.values()[pick];
     }
 
     public Achievement()
     {
-        achievement_description= randomDescription();
+        achievementDescription = randomDescription();
     }
 }
