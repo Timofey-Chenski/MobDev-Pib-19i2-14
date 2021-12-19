@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 
-public class Main {
-    public static void studentInit(Student[] studentList) {
+public class Main
+{
+    public static void studentInit(Student[] studentList)
+    {
         for (int i =0; i < 6; i++)
         {
             studentList[i] = new Student();
@@ -19,7 +21,8 @@ public class Main {
         int attendingStudent2=2;
         int attendingStudent3=5;
 
-        for (int day =0; day < 5; day++) {
+        for (int day =0; day < 5; day++)
+        {
 
             studentList[attendingStudent1].amountOfVisits++;
             studentList[attendingStudent2].amountOfVisits++;
@@ -48,9 +51,9 @@ public class Main {
 
         for (int day =1; day <= 5; day++) {
 
-            studentList[attendingStudent1].amountOfVisits++;
-            studentList[attendingStudent2].amountOfVisits++;
-            studentList[attendingStudent3].amountOfVisits++;
+            studentList[attendingStudent1].setAmountOfVisits(+1);
+            studentList[attendingStudent2].setAmountOfVisits(+1);
+            studentList[attendingStudent3].setAmountOfVisits(+1);
 
             studentList[attendingStudent1].taskAssign(day);
             studentList[attendingStudent1].achievAssign(day);
@@ -64,111 +67,101 @@ public class Main {
 
     }
 
-
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-
+    public static void main(String[] args) throws IOException, ClassNotFoundException
+    {
 
         Student[] studentList = new Student[6];
         studentInit(studentList);
         Random r = new Random();
 
-        if (Files.exists(Paths.get("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student1.ser")) &&
-                Files.exists(Paths.get("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student2.ser")) &&
-                Files.exists(Paths.get("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student3.ser")))
-        {
-            FileInputStream fileInputStream1 = new FileInputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student1.ser");
-            FileInputStream fileInputStream2 = new FileInputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student2.ser");
-            FileInputStream fileInputStream3 = new FileInputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student3.ser");
 
-            ObjectInputStream objectInputStream1 = new ObjectInputStream(fileInputStream1);
-            ObjectInputStream objectInputStream2 = new ObjectInputStream(fileInputStream2);
-            ObjectInputStream objectInputStream3 = new ObjectInputStream(fileInputStream3);
-
-            Student student1 = (Student) objectInputStream1.readObject();
-            Student student2 = (Student) objectInputStream2.readObject();
-            Student student3 = (Student) objectInputStream3.readObject();
-
-            System.out.printf(student1 + "%n" + student2 + "%n" + student3);
-
-            objectInputStream1.close();
-            objectInputStream2.close();
-            objectInputStream3.close();
-
-            FileOutputStream outputStream1 = new FileOutputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student1.ser");
-            FileOutputStream outputStream2 = new FileOutputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student2.ser");
-            FileOutputStream outputStream3 = new FileOutputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student3.ser");
-
-            ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(outputStream1);
-            ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(outputStream2);
-            ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(outputStream3);
-
-            int i = r.nextInt(1);
-            switch (i)
+            try (FileInputStream fileInputStream1 = new FileInputStream("C:\\Student1.ser");
+                 FileInputStream fileInputStream2 = new FileInputStream("C:\\Student2.ser");
+                 FileInputStream fileInputStream3 = new FileInputStream("C:\\Student3.ser");)
             {
-                case 0:
-                    scene1(studentList);
-                    objectOutputStream1.writeObject(studentList[0]);
-                    objectOutputStream2.writeObject(studentList[2]);
-                    objectOutputStream3.writeObject(studentList[5]);
 
-                    objectOutputStream1.close();
-                    objectOutputStream2.close();
-                    objectOutputStream3.close();
-                    break;
+                ObjectInputStream objectInputStream1 = new ObjectInputStream(fileInputStream1);
+                ObjectInputStream objectInputStream2 = new ObjectInputStream(fileInputStream2);
+                ObjectInputStream objectInputStream3 = new ObjectInputStream(fileInputStream3);
 
-                case 1:
-                    scene2(studentList);
-                    objectOutputStream1.writeObject(studentList[1]);
-                    objectOutputStream2.writeObject(studentList[3]);
-                    objectOutputStream3.writeObject(studentList[4]);
+                Student student1 = (Student) objectInputStream1.readObject();
+                Student student2 = (Student) objectInputStream2.readObject();
+                Student student3 = (Student) objectInputStream3.readObject();
 
-                    objectOutputStream1.close();
-                    objectOutputStream2.close();
-                    objectOutputStream3.close();
-                    break;
+                System.out.printf(student1 + "%n" + student2 + "%n" + student3);
+
+                objectInputStream1.close();
+                objectInputStream2.close();
+                objectInputStream3.close();
+
+                FileOutputStream outputStream1 = new FileOutputStream("C:\\Student1.ser");
+                FileOutputStream outputStream2 = new FileOutputStream("C:\\Student2.ser");
+                FileOutputStream outputStream3 = new FileOutputStream("C:\\Student3.ser");
+
+                ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(outputStream1);
+                ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(outputStream2);
+                ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(outputStream3);
+
+                int i = r.nextInt(1);
+                switch (i) {
+                    case 0:
+                        scene1(studentList);
+                        objectOutputStream1.writeObject(studentList[0]);
+                        objectOutputStream2.writeObject(studentList[2]);
+                        objectOutputStream3.writeObject(studentList[5]);
+
+                        objectOutputStream1.close();
+                        objectOutputStream2.close();
+                        objectOutputStream3.close();
+                        break;
+
+                    case 1:
+                        scene2(studentList);
+                        objectOutputStream1.writeObject(studentList[1]);
+                        objectOutputStream2.writeObject(studentList[3]);
+                        objectOutputStream3.writeObject(studentList[4]);
+
+                        objectOutputStream1.close();
+                        objectOutputStream2.close();
+                        objectOutputStream3.close();
+                        break;
+                }
+
             }
+            catch (FileNotFoundException fnfe)
+            { FileOutputStream outputStream1 = new FileOutputStream("A:\\Student1.ser");
+                FileOutputStream outputStream2 = new FileOutputStream("A:\\Student2.ser");
+                FileOutputStream outputStream3 = new FileOutputStream("A:\\Student3.ser");
 
-        }
+                ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(outputStream1);
+                ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(outputStream2);
+                ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(outputStream3);
 
-        else
+                int i = r.nextInt(1);
+                switch (i)
+                {
+                    case 0:
+                        scene1(studentList);
+                        objectOutputStream1.writeObject(studentList[0]);
+                        objectOutputStream2.writeObject(studentList[2]);
+                        objectOutputStream3.writeObject(studentList[5]);
 
-        {
-            FileOutputStream outputStream1 = new FileOutputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student1.ser");
-            FileOutputStream outputStream2 = new FileOutputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student2.ser");
-            FileOutputStream outputStream3 = new FileOutputStream("C:\\Users\\User\\Documents\\GitHub\\MobDev-Pib-19i2-14\\University\\Student3.ser");
+                        objectOutputStream1.close();
+                        objectOutputStream2.close();
+                        objectOutputStream3.close();
+                        break;
 
-            ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(outputStream1);
-            ObjectOutputStream objectOutputStream2 = new ObjectOutputStream(outputStream2);
-            ObjectOutputStream objectOutputStream3 = new ObjectOutputStream(outputStream3);
+                    case 1:
+                        scene2(studentList);
+                        objectOutputStream1.writeObject(studentList[1]);
+                        objectOutputStream2.writeObject(studentList[3]);
+                        objectOutputStream3.writeObject(studentList[4]);
 
-            int i = r.nextInt(1);
-            switch (i)
-            {
-                case 0:
-                    scene1(studentList);
-                    objectOutputStream1.writeObject(studentList[0]);
-                    objectOutputStream2.writeObject(studentList[2]);
-                    objectOutputStream3.writeObject(studentList[5]);
-
-                    objectOutputStream1.close();
-                    objectOutputStream2.close();
-                    objectOutputStream3.close();
-                    break;
-
-                case 1:
-                    scene2(studentList);
-                    objectOutputStream1.writeObject(studentList[1]);
-                    objectOutputStream2.writeObject(studentList[3]);
-                    objectOutputStream3.writeObject(studentList[4]);
-
-                    objectOutputStream1.close();
-                    objectOutputStream2.close();
-                    objectOutputStream3.close();
-                    break;
+                        objectOutputStream1.close();
+                        objectOutputStream2.close();
+                        objectOutputStream3.close();
+                        break;
+                }
             }
-
-        }
     }
 }

@@ -4,11 +4,12 @@ import java.util.Random;
 
 public class Student extends Human implements Serializable
 {
-    private static final long serialVersionUID = 1L;
+
 
     double avgScore;
     Task[] tasksList = new Task[5];
     Achievement[] achievementsList = new Achievement[5];
+
     public Student()
     {
         Random r = new Random();

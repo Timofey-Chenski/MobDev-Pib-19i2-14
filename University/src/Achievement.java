@@ -3,14 +3,14 @@ import java.util.Random;
 
 public class Achievement implements Serializable
 {
-    private static final long serialVersionUID = 2L;
+
 
     AchievementsPit achievementDescription;
 
     @Override
     public String toString() {
         return "Achievement{" +
-                "achievementDescription=" + achievementDescription +
+                "achievementDescription=" + achievementDescription.rusVersion +
                 '}';
     }
 

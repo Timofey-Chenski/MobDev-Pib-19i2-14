@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Task implements Serializable
 {
-    private static final long serialVersionUID = 4L;
+
 
     TasksPit taskDescription;
     ReviewsPit taskReview;
@@ -11,8 +11,8 @@ public class Task implements Serializable
     @Override
     public String toString() {
         return "Task{" +
-                "taskDescription=" + taskDescription +
-                ", taskReview=" + taskReview +
+                "taskDescription=" + taskDescription.rusVersion +
+                ", taskReview=" + taskReview.rusVersion +
                 '}';
     }
 
